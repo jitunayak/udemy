@@ -6,6 +6,7 @@ import tw from "tailwind-react-native-classnames";
 // @ts-ignore
 import image from "../../assets/course-sample.png";
 
+// @ts-ignore
 export default function Courses({navigation}) {
   const [courses, setcourses] = useState<Course[]>([]);
 
@@ -21,7 +22,7 @@ export default function Courses({navigation}) {
   const CourseItem = (item: Course) => {
     return (
       <TouchableOpacity
-          onPress={()=>{navigation.navigate("Details",{courseId: item.id, courseName: item.title})}}
+          onPress={()=>{navigation.navigate("Details",{courseId: item.id, courseName: item.title, courseInstructor: item.instructor})}}
         style={[
           tw`m-2 bg-gray-200 rounded-xl flex flex-col justify-between`,
           { width: 180, height: 220 },

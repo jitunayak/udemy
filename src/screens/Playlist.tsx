@@ -12,7 +12,7 @@ import {Video} from "../models";
 import Player from "./Player";
 import { Feather } from '@expo/vector-icons';
 export default function Playlist({navigation, route}) {
-    const [videos, setVideos] = useState<Video>();
+    const [videos, setVideos] = useState<Video[]>([]);
     const [videourl, setVideourl] = useState<String>();
     const [videoTitle, setVideoTitle] = useState<String>();
     const [videoId, setVideoId] = useState<String>();
@@ -43,7 +43,8 @@ export default function Playlist({navigation, route}) {
                     setVideoId(item.id);
                 }}
                 style={[
-                    tw`${item.id === videoId ? "bg-blue-200" : "bg-gray-100 "} flex-row justify-between`,
+                    tw`${item.id === videoId ? "bg-blue-200" : "bg-gray-100 "} 
+                    flex-row justify-between border-b-2 border-gray-200`,
                 ]}>
                 <View style={tw`p-4`}>
                     <Text style={tw`text-sm  font-semibold`}>{item.title}</Text>
@@ -53,12 +54,11 @@ export default function Playlist({navigation, route}) {
             </TouchableOpacity>
         );
     };
-    // @ts-ignore
     return (
         <View style={tw`bg-white h-full`}>
             {videos ? <></> : <ActivityIndicator/>}
-            <Text style={tw`text-lg font-semibold m-2`}>{route.params.courseName}</Text>
-            <Player videoUrl={videourl} videoTitle={videoTitle}/>
+            <Text style={tw`text-lg font-semibold m-2 text-gray-800`}>{route.params.courseName}</Text>
+            <Player videoUrl={videourl} videoTitle={videoTitle} courseInstructor={route.params.courseInstructor}/>
             <TouchableOpacity
                 style={tw`m-2 flex-row justify-center rounded-lg bg-blue-400 `}>
                 <Feather style={tw`self-center`} name="book" size={24} color="white" />

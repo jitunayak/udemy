@@ -5,7 +5,7 @@ import tw from "tailwind-react-native-classnames";
 import {Dimensions} from "react-native";
 
 // @ts-ignore
-export default function Player({videoUrl, videoTitle}) {
+export default function Player({videoUrl, videoTitle, courseInstructor}) {
     const windowWidth = Dimensions.get("window").width;
     const windowHeight = Dimensions.get("window").height;
     const video = React.useRef(null);
@@ -30,7 +30,7 @@ export default function Player({videoUrl, videoTitle}) {
 
             <View style={tw`p-2`}>
                 <Text style={tw`font-semibold text-lg`}>{videoTitle}</Text>
-                <Text style={tw`text-sm`}>Author: Rob Conery</Text>
+                <Text style={tw`text-sm`}>{courseInstructor}</Text>
 
                 <View style={tw`flex-row`}>
                     {/* <TouchableOpacity

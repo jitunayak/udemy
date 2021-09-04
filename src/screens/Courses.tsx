@@ -1,12 +1,12 @@
 import { DataStore } from "@aws-amplify/datastore";
 import React, { useEffect, useState } from "react";
-import { FlatList, Text, View, Image } from "react-native";
+import {FlatList, Text, View, Image, TouchableOpacity} from "react-native";
 import { Course } from "../models";
 import tw from "tailwind-react-native-classnames";
 // @ts-ignore
 import image from "../../assets/course-sample.png";
 
-export default function Courses() {
+export default function Courses({navigation}) {
   const [courses, setcourses] = useState<Course[]>([]);
 
   useEffect(() => {
@@ -15,12 +15,13 @@ export default function Courses() {
       const response = await DataStore.query(Course);
       setcourses(response);
     };
-    fetchVideos();
+    fetchVideos()
   }, []);
 
   const CourseItem = (item: Course) => {
     return (
-      <View
+      <TouchableOpacity
+          onPress={()=>{navigation.navigate("Details",{courseId: item.id, courseName: item.title})}}
         style={[
           tw`m-2 bg-gray-200 rounded-xl flex flex-col justify-between`,
           { width: 180, height: 220 },
@@ -36,11 +37,11 @@ export default function Courses() {
           <Text style={tw`text-gray-600`}>{item.instructor}</Text>
         </View>
         <Text style={tw`font-semibold p-2`}>{item.paid ? "$20" : "Free"}</Text>
-      </View>
+      </TouchableOpacity>
     );
   };
   return (
-    <View style={tw`bg-white`}>
+    <View style={tw`bg-white flex-1`}>
       <View style={tw`flex-row px-2 justify-between`}>
         <Text style={tw`text-xl font-bold`}>Courses</Text>
         <View style={tw`rounded-full bg-gray-200 p-2`}>

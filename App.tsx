@@ -6,22 +6,27 @@ import Amplify from "aws-amplify";
 import config from "./src/aws-exports";
 import tw from "tailwind-react-native-classnames";
 import Playlist from "./src/screens/Playlist";
+import {NavigationContainer} from "@react-navigation/native";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
 Amplify.configure(config);
 
 export default function App() {
-  return (
-    <SafeAreaView>
-      <Text style={tw`font-bold text-lg m-2`}>Udemy Courses for free</Text>
-      <Playlist />
-      <StatusBar style='auto' />
-    </SafeAreaView>
+    const Stack = createNativeStackNavigator();
+
+    return (
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName="Home">
+                <Stack.Screen name="Home" component={Courses} />
+                <Stack.Screen name="Details" component={Playlist} />
+            </Stack.Navigator>
+        </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "red",
     alignItems: "center",
     justifyContent: "center",
   },

@@ -53,7 +53,7 @@ function CoursesList({navigation,categoryId,categoryName}) {
     return (
         <View style={tw`bg-white flex-1`}>
             <View style={tw`flex-row px-2 justify-between`}>
-                <Text style={tw`text-base font-semibold`}>{categoryName}</Text>
+                <Text style={tw`text-lg my-2 font-semibold`}>{categoryName}</Text>
             </View>
             <FlatList
                 data={courses}

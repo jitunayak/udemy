@@ -9,6 +9,9 @@ import Playlist from "./src/screens/Playlist";
 import {DefaultTheme, NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import Home from "./src/screens/Home";
+import BottomTabNavigationPage from "./src/navigation/BottomTabNavigationPage";
+import {SafeAreaContext} from "react-native-safe-area-context";
+import CourseStackNavigation from "./src/navigation/CourseStackNavigation";
 
 Amplify.configure(config);
 
@@ -18,25 +21,18 @@ export default function App() {
         colors: {
             primary: '#DC2626',
             background: '#fff',
-            card: '#FEE2E2',
+            card: "#fff",
             text: '#DC2626',
-            border: 'rgb(255, 45, 85)',
+            border: '#FEE2E2',
             notification: 'rgb(255, 45, 85)'
         }
     };
 
-
-    const Stack = createNativeStackNavigator();
-
     return (
-        <NavigationContainer theme={MyTheme}>
-            <Stack.Navigator screenOptions={{
-                headerShown: false,
-            }} initialRouteName="Udemy Home">
-                <Stack.Screen name="Udemy Home" component={Home}/>
-                <Stack.Screen name="Details" component={Playlist} />
-            </Stack.Navigator>
-        </NavigationContainer>
+            <NavigationContainer theme={MyTheme}>
+                <StatusBar translucent={true}/>
+                <CourseStackNavigation/>
+            </NavigationContainer>
     );
 }
 

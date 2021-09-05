@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, SafeAreaView, ScrollView, Text} from 'react-native';
+import {ActivityIndicator, SafeAreaView, ScrollView, Text, View} from 'react-native';
 import {Categories, Course} from "../models"
 import {DataStore, Predicates, SortDirection} from "@aws-amplify/datastore";
 import tw from "tailwind-react-native-classnames";
@@ -36,8 +36,11 @@ function Home({navigation}) {
                         )
                     })
                 }
-
+                <Text style={tw`p-10 self-center`}>
+                    @copyright 2021 Udemy
+                </Text>
             </ScrollView>
+
         </SafeAreaView>
     );
 

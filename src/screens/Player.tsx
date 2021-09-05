@@ -16,7 +16,7 @@ export default function Player({videoUrl, videoTitle, courseInstructor}) {
         <View style={tw`w-full`}>
             <Video
                 ref={video}
-                style={{width: windowWidth, height: windowWidth * 0.58}}
+                style={{width: windowWidth, aspectRatio:16/9}}
                 source={{
                     uri: videoUrl,
                 }}
@@ -31,7 +31,6 @@ export default function Player({videoUrl, videoTitle, courseInstructor}) {
             <View style={tw`p-2`}>
                 <Text style={tw`font-semibold text-lg`}>{videoTitle}</Text>
                 <Text style={tw`text-sm`}>{courseInstructor}</Text>
-
                 <View style={tw`flex-row`}>
                     {/* <TouchableOpacity
             style={tw`m-2`}

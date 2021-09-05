@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "Video": {
-            "name": "Video",
+        "Categories": {
+            "name": "Categories",
             "fields": {
                 "id": {
                     "name": "id",
@@ -10,33 +10,26 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "title": {
-                    "name": "title",
+                "categoryName": {
+                    "name": "categoryName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "duration": {
-                    "name": "duration",
-                    "isArray": false,
-                    "type": "Float",
+                "CategoriesCourses": {
+                    "name": "CategoriesCourses",
+                    "isArray": true,
+                    "type": {
+                        "model": "Course"
+                    },
                     "isRequired": false,
-                    "attributes": []
-                },
-                "courseID": {
-                    "name": "courseID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "url": {
-                    "name": "url",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "categoriesID"
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -56,20 +49,11 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Videos",
+            "pluralName": "Categories",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byCourse",
-                        "fields": [
-                            "courseID"
-                        ]
-                    }
                 },
                 {
                     "type": "auth",
@@ -169,6 +153,13 @@ export const schema = {
                         "associatedWith": "courseID"
                     }
                 },
+                "categoriesID": {
+                    "name": "categoriesID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -194,6 +185,104 @@ export const schema = {
                     "properties": {}
                 },
                 {
+                    "type": "key",
+                    "properties": {
+                        "name": "byCategories",
+                        "fields": [
+                            "categoriesID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Video": {
+            "name": "Video",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "title": {
+                    "name": "title",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "duration": {
+                    "name": "duration",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "courseID": {
+                    "name": "courseID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "url": {
+                    "name": "url",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Videos",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byCourse",
+                        "fields": [
+                            "courseID"
+                        ]
+                    }
+                },
+                {
                     "type": "auth",
                     "properties": {
                         "rules": [
@@ -214,5 +303,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "c1703c42c62ecbac88801e65b973a285"
+    "version": "4d9f93967517bf3afd9078278230ea27"
 };

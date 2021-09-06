@@ -6,6 +6,26 @@ import image from "../../assets/course-sample.png";
 import {DataStore} from "@aws-amplify/datastore";
 import {useTheme} from "@react-navigation/native";
 
+function CostOfCourse(props: { paid: boolean | undefined, s: string }) {
+    return <View style={tw`flex-row`}>
+        {
+            !props.paid && <Text
+                style={tw`font-semibold p-2 text-red-900 line-through self-center`}>
+                {`₹ ${props.s}`}
+            </Text>
+        }
+
+        <Text
+            style={tw`font-semibold  ${
+                props.paid
+                    ? "p-2 text-red-900"
+                    : "text-yellow-800 py-1 px-2 m-2 bg-yellow-100 w-12"
+            }`}>
+            {props.paid ? `₹ ${props.s}` : "Free"}
+        </Text>
+    </View>;
+}
+
 function CoursesList({navigation, categoryId, categoryName}) {
     const [courses, setcourses] = useState<Course[]>([]);
     const {colors} = useTheme();
@@ -43,11 +63,11 @@ function CoursesList({navigation, categoryId, categoryName}) {
                     });
                 }}
                 style={[
-                    tw`m-2 bg-gray-50 rounded-xl flex flex-col justify-around`,
-                    {width: 180, height: 220},
+                    tw`m-2 bg-white rounded-xl flex-col justify-around`,
+                    {width: 180},
                 ]}>
                 <Image
-                    style={[{height: 120, width: 180}, tw`rounded-t-xl`]}
+                    style={[{height: 120, width: 180}, tw`rounded-t-sm`]}
                     resizeMode={"stretch"}
                     source={image}
                 />
@@ -56,16 +76,7 @@ function CoursesList({navigation, categoryId, categoryName}) {
                     <Text style={tw`text-gray-600 text-sm`}>{item.publishedDate}</Text>
                     <Text style={tw`text-gray-600`}>{item.instructor}</Text>
                 </View>
-                <View style={tw`rounded-lg`}>
-                    <Text
-                        style={tw`font-semibold  ${
-                            item.paid
-                                ? "p-2"
-                                : "text-yellow-800 py-1 px-2 m-2 bg-yellow-100 w-12"
-                        }`}>
-                        {item.paid ? `₹ ${moneyConversion(item.cost)}` : "Free"}
-                    </Text>
-                </View>
+                <CostOfCourse paid={item.paid} s={moneyConversion(item.cost)}/>
             </TouchableOpacity>
         );
     };

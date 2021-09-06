@@ -162,6 +162,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "cost": {
+                    "name": "cost",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -315,5 +322,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "4eb23a31f9620ef559bb99329b8ce62d"
+    "version": "928e6872d11038023f8774b76ac094e0"
 };

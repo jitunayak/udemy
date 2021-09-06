@@ -43,6 +43,7 @@ export declare class Course {
   readonly paid?: boolean;
   readonly Videos?: (Video | null)[];
   readonly categoriesID?: string;
+  readonly cost?: number;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Course, CourseMetaData>);

@@ -1,6 +1,11 @@
 import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
 
-
+export enum CourseCategoriesEnum {
+  MATHEMATICS = "MATHEMATICS",
+  PHYSICS = "PHYSICS",
+  CODING = "CODING",
+  CHEMISTRY = "CHEMISTRY"
+}
 
 
 
@@ -34,7 +39,7 @@ export declare class Course {
   readonly details?: string;
   readonly publishedDate?: string;
   readonly thumbnail?: string;
-  readonly category?: string;
+  readonly category?: CourseCategoriesEnum | keyof typeof CourseCategoriesEnum;
   readonly paid?: boolean;
   readonly Videos?: (Video | null)[];
   readonly categoriesID?: string;

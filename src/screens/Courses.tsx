@@ -1,13 +1,13 @@
 import { DataStore } from "@aws-amplify/datastore";
 import React, { useEffect, useState } from "react";
-import {FlatList, Text, View, Image, TouchableOpacity} from "react-native";
+import { FlatList, Text, View, Image, TouchableOpacity } from "react-native";
 import { Course } from "../models";
 import tw from "tailwind-react-native-classnames";
 // @ts-ignore
 import image from "../../assets/course-sample.png";
 
 // @ts-ignore
-export default function Courses({navigation}) {
+export default function Courses({ navigation }) {
   const [courses, setcourses] = useState<Course[]>([]);
 
   useEffect(() => {
@@ -16,13 +16,19 @@ export default function Courses({navigation}) {
       const response = await DataStore.query(Course);
       setcourses(response);
     };
-    fetchVideos()
+    fetchVideos();
   }, []);
 
   const CourseItem = (item: Course) => {
     return (
       <TouchableOpacity
-          onPress={()=>{navigation.navigate("Details",{courseId: item.id, courseName: item.title, courseInstructor: item.instructor})}}
+        onPress={() => {
+          navigation.navigate("Details", {
+            courseId: item.id,
+            courseName: item.title,
+            courseInstructor: item.instructor,
+          });
+        }}
         style={[
           tw`m-2 bg-gray-200 rounded-xl flex flex-col justify-between`,
           { width: 180, height: 220 },

@@ -128,7 +128,9 @@ export const schema = {
                 "category": {
                     "name": "category",
                     "isArray": false,
-                    "type": "String",
+                    "type": {
+                        "enum": "CourseCategoriesEnum"
+                    },
                     "isRequired": false,
                     "attributes": []
                 },
@@ -301,7 +303,17 @@ export const schema = {
             ]
         }
     },
-    "enums": {},
+    "enums": {
+        "CourseCategoriesEnum": {
+            "name": "CourseCategoriesEnum",
+            "values": [
+                "MATHEMATICS",
+                "PHYSICS",
+                "CODING",
+                "CHEMISTRY"
+            ]
+        }
+    },
     "nonModels": {},
-    "version": "4d9f93967517bf3afd9078278230ea27"
+    "version": "4eb23a31f9620ef559bb99329b8ce62d"
 };

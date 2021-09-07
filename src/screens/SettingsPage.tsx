@@ -18,6 +18,7 @@ import {
 } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { Overlay, Rating, AirbnbRating } from "react-native-elements";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SettingsPage() {
   const [image, setImage] = useState(null);
@@ -39,7 +40,29 @@ export default function SettingsPage() {
         }
       }
     })();
+    getData();
   }, []);
+
+  const storeData = async (value: string) => {
+    try {
+      await AsyncStorage.setItem("image_url", value);
+    } catch (e) {
+      alert("saving error");
+    }
+  };
+
+  async function getData() {
+    try {
+      const value = await AsyncStorage.getItem("image_url");
+      if (value !== null) {
+        // value previously stored
+        setImage(value);
+      }
+    } catch (e) {
+      // error reading value
+      alert("Error loading profile image");
+    }
+  }
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -53,6 +76,7 @@ export default function SettingsPage() {
 
     if (!result.cancelled) {
       setImage(result.uri);
+      storeData(result.uri);
     }
   };
   const LogOutButton = () => {

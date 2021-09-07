@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
-  Button,
   TouchableOpacity,
   Platform,
   Image,
@@ -11,17 +10,15 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import tw from "tailwind-react-native-classnames";
 import {
-  MaterialIcons,
-  Ionicons,
   Feather,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
-import { Overlay, Rating, AirbnbRating } from "react-native-elements";
+import { Overlay, AirbnbRating } from "react-native-elements";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SettingsPage() {
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<string>( "");
   const [showDeveloperModal, setshowDeveloperModal] = useState(false);
   const rating = [
     "Contact Helpdesk",
@@ -76,7 +73,7 @@ export default function SettingsPage() {
 
     if (!result.cancelled) {
       setImage(result.uri);
-      storeData(result.uri);
+      await storeData(result.uri);
     }
   };
   const LogOutButton = () => {

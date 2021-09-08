@@ -1,10 +1,12 @@
-import React, { Component, useEffect, useState } from "react";
-import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
-import { Course, Video } from "../models";
-import tw from "tailwind-react-native-classnames";
-import image from "../../assets/course-sample.png";
 import { DataStore } from "@aws-amplify/datastore";
 import { useTheme } from "@react-navigation/native";
+import React, { Component, useEffect, useState } from "react";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
+import tw from "tailwind-react-native-classnames";
+
+import image from "../../assets/course-sample.png";
+import { Course } from "../models";
+import { moneyConversion } from "../utilities/Commonutilities";
 
 function CostOfCourse(props: { paid: boolean | undefined; s: string }) {
   return (
@@ -44,15 +46,6 @@ function CoursesList({ navigation, categoryId, categoryName }) {
     fetchVideos();
   }, [categoryId]);
 
-  const moneyConversion = (x) => {
-    x = x.toString();
-    let lastThree = x.substring(x.length - 3);
-    const otherNumbers = x.substring(0, x.length - 3);
-    if (otherNumbers != "") lastThree = "," + lastThree;
-    const res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
-    return res;
-  };
-
   const CourseItem = (item: Course) => {
     return (
       <TouchableOpacity
@@ -62,7 +55,7 @@ function CoursesList({ navigation, categoryId, categoryName }) {
             courseName: item.title,
             courseInstructor: item.instructor,
             isPaid: item.paid,
-            courseCost: moneyConversion(item.cost),
+            courseCost: moneyConversion(item.cost ?? 0),
           });
         }}
         style={[
@@ -79,7 +72,7 @@ function CoursesList({ navigation, categoryId, categoryName }) {
           <Text style={tw`text-gray-600 text-sm`}>{item.publishedDate}</Text>
           <Text style={tw`text-gray-600`}>{item.instructor}</Text>
         </View>
-        <CostOfCourse paid={item.paid} s={moneyConversion(item.cost)} />
+        <CostOfCourse paid={item.paid} s={moneyConversion(item.cost ?? 0)} />
       </TouchableOpacity>
     );
   };

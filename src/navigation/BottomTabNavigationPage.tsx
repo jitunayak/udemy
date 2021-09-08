@@ -9,6 +9,7 @@ import SettingsPage from "../screens/SettingsPage";
 
 function BottomTabNavigationPage() {
   const Tab = createBottomTabNavigator();
+  let iconName: string;
 
   return (
     <Tab.Navigator
@@ -18,7 +19,6 @@ function BottomTabNavigationPage() {
         lazy: false,
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
           if (route.name === "Home") {
             iconName = focused ? "home" : "home";
           } else if (route.name === "Search") {

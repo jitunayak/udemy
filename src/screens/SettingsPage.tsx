@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Platform,
-  Image,
-  ScrollView,
-  Alert,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import tw from "tailwind-react-native-classnames";
 import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
-import { Overlay, AirbnbRating } from "react-native-elements";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useEffect, useState } from "react";
+import {
+  Alert,
+  Image,
+  Platform,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { AirbnbRating, Overlay } from "react-native-elements";
+import { SafeAreaView } from "react-native-safe-area-context";
+import tw from "tailwind-react-native-classnames";
+
 import {
   getAsyncStorageData,
   storeAsyncStorageData,

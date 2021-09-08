@@ -1,18 +1,20 @@
+import { Feather } from "@expo/vector-icons";
+import { useTheme } from "@react-navigation/native";
 import { DataStore } from "aws-amplify";
 import React, { useState } from "react";
 import {
-  View,
-  Text,
-  FlatList,
   ActivityIndicator,
-  TouchableOpacity,
+  FlatList,
   SafeAreaView,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import tw from "tailwind-react-native-classnames";
+
 import { Video } from "../models";
 import Player from "./Player";
-import { Feather } from "@expo/vector-icons";
-import { useTheme } from "@react-navigation/native";
+
 // @ts-ignore
 export default function Playlist({ navigation, route }) {
   const [videos, setVideos] = useState<Video[]>([]);

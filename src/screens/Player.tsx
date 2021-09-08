@@ -1,8 +1,7 @@
+import { AVPlaybackStatus, Video } from "expo-av";
 import React, { useState } from "react";
-import { View, Text, Button, TouchableOpacity } from "react-native";
-import { Video, AVPlaybackStatus } from "expo-av";
+import { Dimensions, Text, View } from "react-native";
 import tw from "tailwind-react-native-classnames";
-import { Dimensions } from "react-native";
 
 // @ts-ignore
 export default function Player({ videoUrl, videoTitle, courseInstructor }) {

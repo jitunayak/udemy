@@ -1,15 +1,13 @@
 import React, { Component, useState } from "react";
 import {
   Platform,
-  Pressable,
   SafeAreaView,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
-import tw from "tailwind-react-native-classnames";
 import { SearchBar } from "react-native-elements";
+import tw from "tailwind-react-native-classnames";
 
 function SearchPage() {
   const [selected, setSelected] = useState<String[]>([""]);

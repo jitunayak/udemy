@@ -59,7 +59,7 @@ function CoursesList({ navigation, categoryId, categoryName }) {
           });
         }}
         style={[
-          tw`m-2 bg-white rounded-xl flex-col justify-around`,
+          tw`m-2 bg-white rounded-xl flex-col justify-between`,
           { width: 180 },
         ]}>
         <Image

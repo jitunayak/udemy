@@ -42,7 +42,7 @@ export default function SettingsPage() {
       }
     })();
     getAsyncStorageData(IMAGE_KEY)
-      .then((uri) => setImage(uri))
+      .then((uri) => setImage(uri!))
       .catch((err) => Alert.alert("Could not find photo in local cache"));
   }, []);
 
@@ -63,7 +63,11 @@ export default function SettingsPage() {
   };
   const LogOutButton = () => {
     return (
-      <TouchableOpacity style={tw`mt-4`}>
+      <TouchableOpacity
+        style={tw`mt-4`}
+        onPress={() => {
+          Alert.alert("Not implemented");
+        }}>
         <Text
           style={tw`text-red-800 bg-red-50 p-2 font-semibold text-base text-center w-full`}>
           Logout
@@ -106,17 +110,19 @@ export default function SettingsPage() {
         <Text style={tw`font-bold text-2xl p-2`}>Settings Page</Text>
         <View style={tw`flex-row p-2`}>
           {image ? (
-            <Image
-              source={{ uri: image }}
-              style={[
-                tw`self-center`,
-                {
-                  width: 100,
-                  height: 100,
-                  borderRadius: 100,
-                },
-              ]}
-            />
+            <TouchableOpacity onPress={pickImage}>
+              <Image
+                source={{ uri: image }}
+                style={[
+                  tw`self-center`,
+                  {
+                    width: 100,
+                    height: 100,
+                    borderRadius: 100,
+                  },
+                ]}
+              />
+            </TouchableOpacity>
           ) : (
             <View
               style={[
@@ -133,14 +139,14 @@ export default function SettingsPage() {
             </View>
           )}
 
-          <Feather
+          {/* <Feather
             name='edit-2'
             style={tw`p-2`}
             size={20}
             color='gray'
             onPress={pickImage}
-          />
-          <View style={tw`flex-wrap self-center py-2`}>
+          /> */}
+          <View style={tw`flex-wrap self-center px-4`}>
             <Text style={tw`text-xl py-2 `}>Jitu Nayak</Text>
             <Text style={tw`text-base text-gray-500`}>+91-9999999999</Text>
             <Text style={tw`text-base text-gray-500 `}>

@@ -6,20 +6,24 @@ import {
   Platform,
   Image,
   ScrollView,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import tw from "tailwind-react-native-classnames";
-import {
-  Feather,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
+import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { Overlay, AirbnbRating } from "react-native-elements";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  getAsyncStorageData,
+  storeAsyncStorageData,
+} from "../utilities/LocalStorageUtulity";
 
 export default function SettingsPage() {
-  const [image, setImage] = useState<string>( "");
+  const [image, setImage] = useState<string>("");
   const [showDeveloperModal, setshowDeveloperModal] = useState(false);
+  const IMAGE_KEY = "image_url";
+
   const rating = [
     "Contact Helpdesk",
     "Email us",
@@ -37,29 +41,10 @@ export default function SettingsPage() {
         }
       }
     })();
-    getData();
+    getAsyncStorageData(IMAGE_KEY)
+      .then((uri) => setImage(uri))
+      .catch((err) => Alert.alert("Could not find photo in local cache"));
   }, []);
-
-  const storeData = async (value: string) => {
-    try {
-      await AsyncStorage.setItem("image_url", value);
-    } catch (e) {
-      alert("saving error");
-    }
-  };
-
-  async function getData() {
-    try {
-      const value = await AsyncStorage.getItem("image_url");
-      if (value !== null) {
-        // value previously stored
-        setImage(value);
-      }
-    } catch (e) {
-      // error reading value
-      alert("Error loading profile image");
-    }
-  }
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -73,7 +58,7 @@ export default function SettingsPage() {
 
     if (!result.cancelled) {
       setImage(result.uri);
-      await storeData(result.uri);
+      await storeAsyncStorageData(IMAGE_KEY, result.uri);
     }
   };
   const LogOutButton = () => {

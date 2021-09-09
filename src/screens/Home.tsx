@@ -21,6 +21,7 @@ function Home({ navigation }) {
   const [refreshing, setRefreshing] = React.useState(true);
 
   useEffect(() => {
+    console.log("refreshing..");
     DataStore.query(Categories, Predicates.ALL, {
       sort: (s) => s.createdAt(SortDirection.DESCENDING),
     }).then((categories) => {

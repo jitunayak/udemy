@@ -51,19 +51,19 @@ export default function Playlist({ navigation, route }) {
           setVideoId(item.id);
         }}
         style={[
-          tw`flex-row justify-between border-b-2 border-gray-200`,
+          tw`flex-row justify-start border-b-2 border-gray-200 p-4`,
           {
             backgroundColor: `${
               item.id === videoId ? `${colors.card}` : "#F3F4F6"
             }`,
           },
         ]}>
-        <View style={tw`p-4`}>
-          <Text style={tw`text-sm  font-semibold`}>{item.title}</Text>
-          <Text style={tw`text-gray-600 text-sm`}>{item.duration} minutes</Text>
+        <View style={tw`flex-auto`}>
+          <Text style={tw`text-sm`}>{item.title}</Text>
+          <Text style={tw`text-gray-400 text-sm`}>{item.duration} minutes</Text>
         </View>
         <Feather
-          style={tw`self-center px-4`}
+          style={tw`self-center mr-2`}
           name='play-circle'
           size={24}
           color='black'
@@ -76,9 +76,9 @@ export default function Playlist({ navigation, route }) {
   }
   return (
     <SafeAreaView style={tw`bg-white h-full`}>
-      <Text style={tw`text-2xl font-semibold m-2 text-gray-800 px-2`}>
+      {/* <Text style={tw`text-2xl font-semibold m-2 text-gray-800 px-2`}>
         {route.params.courseName}
-      </Text>
+      </Text> */}
       <Player
         videoUrl={videourl}
         videoTitle={videoTitle}
@@ -98,7 +98,10 @@ export default function Playlist({ navigation, route }) {
             : " Free to enroll"}
         </Text>
       </TouchableOpacity>
-      <Text style={tw`text-lg font-semibold px-2`}>Playlist</Text>
+      <View style={tw`flex-row p-2`}>
+        <Feather name='list' size={25} color='black' />
+        <Text style={tw`text-lg font-semibold px-2`}>Playlist</Text>
+      </View>
       <FlatList
         data={videos}
         keyExtractor={(course) => course.id}

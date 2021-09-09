@@ -25,7 +25,7 @@ export default function App() {
       background: "#FFF",
       card: "#fff",
       text: "#DC2626",
-      border: "#FEE2E2",
+      border: "#F9FAFB",
       notification: "rgb(255, 45, 85)",
     },
   };

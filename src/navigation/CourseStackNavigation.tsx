@@ -20,7 +20,7 @@ function CourseStackNavigation({ navigation }) {
       <Stack.Screen
         name='Details'
         options={{
-          headerBackTitle: "back",
+          headerBackTitle: "Back",
           title: "",
           headerRight: () => (
             <Feather

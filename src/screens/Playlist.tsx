@@ -1,6 +1,6 @@
 import { Feather } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
-import { DataStore } from "aws-amplify";
+import { DataStore, Predicates } from "aws-amplify";
 import React, { useState } from "react";
 import {
   ActivityIndicator,
@@ -29,10 +29,15 @@ export default function Playlist({ navigation, route }) {
       //     (video) => video.courseID === "c05e96d0-d6e9-4a92-9bba-a27dad2957a2"
       // );
       const testCourseId = "c05e96d0-d6e9-4a92-9bba-a27dad2957a2";
+
       let response = await DataStore.query(Video, (video) =>
         video.courseID("eq", route.params.courseId)
       );
 
+      // response = response.sort(
+      //   (e, f) => new Date(e.createdAt) - new Date(f.createdAt)
+      // );
+      // response.map((e) => console.log(e.createdAt));
       setVideos(response);
       setVideourl(response[0]?.url);
       setVideoTitle(response[0]?.title);
@@ -43,6 +48,7 @@ export default function Playlist({ navigation, route }) {
   }, []);
 
   const VideoItem = (item: Video) => {
+    const currentPlaying = item.id === videoId;
     return (
       <TouchableOpacity
         onPress={() => {
@@ -51,23 +57,38 @@ export default function Playlist({ navigation, route }) {
           setVideoId(item.id);
         }}
         style={[
-          tw`flex-row justify-start border-b-2 border-gray-200 p-4`,
+          tw`flex-row justify-start border-b-2 border-gray-200 p-4 mx-2`,
           {
             backgroundColor: `${
-              item.id === videoId ? `${colors.card}` : "#F3F4F6"
+              currentPlaying ? "#FEF2F2" : `${colors.background}`
             }`,
           },
         ]}>
         <View style={tw`flex-auto`}>
-          <Text style={tw`text-sm`}>{item.title}</Text>
+          <Text
+            style={tw`text-sm font-medium ${
+              currentPlaying ? "text-red-800" : ""
+            }`}>
+            {item.title}
+          </Text>
           <Text style={tw`text-gray-400 text-sm`}>{item.duration} minutes</Text>
         </View>
-        <Feather
-          style={tw`self-center mr-2`}
-          name='play-circle'
-          size={24}
-          color='black'
-        />
+
+        {currentPlaying ? (
+          <Feather
+            style={tw`self-center mr-2`}
+            name='pause-circle'
+            size={24}
+            color='#991B1B'
+          />
+        ) : (
+          <Feather
+            style={tw`self-center mr-2`}
+            name='play-circle'
+            size={24}
+            color='black'
+          />
+        )}
       </TouchableOpacity>
     );
   };
@@ -80,16 +101,16 @@ export default function Playlist({ navigation, route }) {
         {route.params.courseName}
       </Text> */}
       <Player
-        videoUrl={videourl}
+        videoUrl={videourl ?? ""}
         videoTitle={videoTitle}
         courseInstructor={route.params.courseInstructor}
       />
       <TouchableOpacity
         style={[
-          tw`m-2 flex-row justify-center rounded-md `,
-          {
-            backgroundColor: `${colors.primary}`,
-          },
+          tw`m-2 flex-row justify-center rounded-md bg-red-400 `,
+          // {
+          //   backgroundColor: `${colors.primary}`,
+          // },
         ]}>
         <Feather style={tw`self-center`} name='book' size={24} color='white' />
         <Text style={tw`p-4 text-white font-bold`}>

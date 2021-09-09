@@ -4,7 +4,6 @@ import React, { Component, useEffect, useState } from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import tw from "tailwind-react-native-classnames";
 
-import image from "../../assets/course-sample.png";
 import { Course } from "../models";
 import { moneyConversion } from "../utilities/Commonutilities";
 

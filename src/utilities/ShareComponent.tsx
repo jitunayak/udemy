@@ -1,5 +1,4 @@
-import React from "react";
-import { Share, View, Button } from "react-native";
+import { Share } from "react-native";
 
 export const onShare = async () => {
   try {

@@ -1,3 +1,5 @@
+import { DataStore, Predicates, SortDirection } from "@aws-amplify/datastore";
+import { Feather } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import {
   RefreshControl,
@@ -6,11 +8,10 @@ import {
   Text,
   View,
 } from "react-native";
-import { Categories } from "../models";
-import { DataStore, Predicates, SortDirection } from "@aws-amplify/datastore";
 import tw from "tailwind-react-native-classnames";
+
+import { Categories } from "../models";
 import CoursesList from "./CoursesList";
-import { Feather } from "@expo/vector-icons";
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));

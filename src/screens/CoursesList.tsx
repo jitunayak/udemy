@@ -60,12 +60,12 @@ function CoursesList({ navigation, categoryId, categoryName }) {
         }}
         style={[
           tw`m-2 bg-white rounded-xl flex-col justify-between`,
-          { width: 180 },
+          { width: 200 },
         ]}>
         <Image
-          style={[{ height: 120, width: 180 }, tw`rounded-t-sm`]}
+          style={[{ height: 120, width: 200 }, tw`rounded-t-sm`]}
           resizeMode={"stretch"}
-          source={image}
+          source={{ uri: item.thumbnail }}
         />
         <View style={tw`p-2`}>
           <Text style={tw`text-base  font-semibold`}>{item.title}</Text>

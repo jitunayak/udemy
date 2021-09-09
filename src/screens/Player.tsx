@@ -33,7 +33,7 @@ export default function Player({ videoUrl, videoTitle, courseInstructor }) {
 
       <View style={tw`p-2`}>
         <Text style={tw`font-semibold text-lg`}>{videoTitle}</Text>
-        <Text style={tw`text-sm font-semibold`}>
+        <Text style={tw`text-sm mt-2 text-gray-600`}>
           Created by{" "}
           <Text style={tw`text-red-400 font-semibold`}>{courseInstructor}</Text>
         </Text>

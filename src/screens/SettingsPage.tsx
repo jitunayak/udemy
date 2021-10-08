@@ -19,7 +19,11 @@ import {
   storeAsyncStorageData,
 } from "../utilities/LocalStorageUtulity";
 
+import { Auth } from 'aws-amplify';
+
 export default function SettingsPage() {
+
+
   const [image, setImage] = useState<string>("");
   const [showDeveloperModal, setshowDeveloperModal] = useState(false);
   const IMAGE_KEY = "image_url";
@@ -66,7 +70,11 @@ export default function SettingsPage() {
       <TouchableOpacity
         style={tw`mt-4`}
         onPress={() => {
-          Alert.alert("Not implemented");
+          try {
+            Auth.signOut();
+          } catch (error) {
+            Alert.alert('error signing out: ', error);
+          }
         }}>
         <Text
           style={tw`text-red-800 bg-red-50 p-2 font-semibold text-base text-center w-full`}>

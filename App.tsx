@@ -14,10 +14,11 @@ import { SafeAreaContext } from "react-native-safe-area-context";
 import CourseStackNavigation from "./src/navigation/CourseStackNavigation";
 import WelcomeOnBoard from "./src/navigation/WelcomeOnBoard";
 import NetInfo from "@react-native-community/netinfo";
+import { withAuthenticator } from "aws-amplify-react-native"
 
 Amplify.configure(config);
 
-export default function App() {
+const App = () => {
   const MyTheme = {
     ...DefaultTheme,
     colors: {
@@ -44,6 +45,8 @@ export default function App() {
     // <WelcomeOnBoard/>
   );
 }
+
+export default withAuthenticator(App);
 
 const styles = StyleSheet.create({
   container: {

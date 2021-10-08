@@ -19,6 +19,7 @@
     "@types/react-native-onboarding-swiper": "^1.1.2",
     "autoprefixer": "@^10.0.2",
     "aws-amplify": "^4.2.6",
+    "aws-amplify-react-native": "^5.0.3",
     "expo": "~42.0.1",
     "expo-av": "~9.2.3",
     "expo-image-picker": "~10.2.2",
@@ -32,6 +33,7 @@
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
     "react-native-web": "~0.13.12",
+    "react-native-webview": "11.6.2",
     "tailwind-react-native-classnames": "^1.4.3"
   },
   "devDependencies": {
